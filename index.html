@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+    <title>FlyZone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            /* Removido gradiente do body, deixando fundo branco */
+            background: white;
+            min-height: 100vh;
+            /* Mudado cor do texto para preto para contraste no fundo branco */
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 15px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 1. Ajuste a classe .logo para acomodar a imagem */
+        .logo {
+            /* Mantenha o que você já tem: */
+            margin-top: 2px;
+            margin-bottom: 2px;
+
+            /* Remova as propriedades de texto que não são mais necessárias */
+            /* font-size: 24px; */
+            /* font-weight: bold; */
+            /* color: #ff1493 !important; */
+        }
+
+        /* 2. Adicione estilos para a imagem */
+        .navbar-logo {
+            /* Define a altura máxima para que a logo se encaixe na nav. */
+            height: 40px;
+
+            /* Garante que a imagem não ultrapasse sua largura (opcional) */
+            width: auto;
+
+            /* Garante que a imagem se ajuste bem com os outros elementos */
+            vertical-align: middle;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #ff1493;
+        }
+
+        /* Hero Section */
+        .hero {
+            /* Adicionado gradiente apenas no hero section */
+           background: #2D0040;
+background: linear-gradient(90deg, rgba(45, 0, 64, 1) 0%, rgba(232, 26, 168, 1) 50%, rgba(232, 90, 26, 1) 88%);
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            gap: 50px;
+            /* Adicionado cor branca para texto no hero */
+            color: white;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .hero-title .diversao {
+            color: white;
+        }
+
+        .hero-title .adrenalina {
+            color: #ffffff;
+        }
+
+        .hero-title .flyzone {
+            color: #ffffff;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary {
+            background: white;
+            color: black;
+        }
+
+        .btn-primary:active {
+            background: #e0e0e0;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: black;
+        }
+
+        .btn-secondary:active {
+            background: #e0e0e0;
+        }
+
+
+
+
+        /* Nova seção de conteúdo branco antes do footer */
+        .content-section {
+            background: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .content-section p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature {
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        .feature h3 .fa-trophy {
+            /* Exemplo: Altera a cor do ícone para preto */
+            color: #333;
+
+            /* Aumenta o tamanho do ícone */
+            font-size: 1.8rem;
+
+            /* Adiciona uma margem à direita para separar do texto */
+            margin-right: 10px;
+
+            /* Alinha o ícone verticalmente no meio do texto */
+            vertical-align: middle;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            /* Mantido gradiente no footer */
+            background: #2D0040;
+background: linear-gradient(90deg, rgba(45, 0, 64, 1) 0%, rgba(232, 26, 168, 1) 50%, rgba(232, 90, 26, 1) 88%);
+            padding: 60px 0 20px;
+            color: white;
+        }
+
+        .footer-cta {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .footer-cta h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .footer-cta p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .footer-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-phone {
+            background: #ff1493;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s;
+        }
+
+        .btn-instagram {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s;
+        }
+
+        .btn-phone:hover,
+        .btn-instagram:hover {
+            transform: translateY(-2px);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ff1493;
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-icon {
+            color: #ff1493;
+            font-weight: bold;
+            min-width: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 15px;
+                font-size: 14px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 0;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-cta h2 {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .footer-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-phone,
+            .btn-instagram {
+                width: 250px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="img/logooo.png" alt="FlyZone Logo" class="navbar-logo">
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="funcionamento.html">Funcionamento</a></li>
+                    <li><a href="#precos">Preços</a></li>
+                    <li><a href="#atracoes">Atrações</a></li>
+                    <li><a href="#eventos">Eventos</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="diversao">Sua Aventura</span><br>
+                        <span class="adrenalina"> Começa na</span><br>
+                        <span class="flyzone">FlyZone!</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        O Único e Mais Incrível Parque de Trampolim de Salto-SP: Venha Viver Momentos Únicos com
+                        Segurança e Muita Diversão!
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#precos" class="btn btn-primary">VER PREÇOS</a>
+                        <a href="#eventos" class="btn btn-secondary">Faça seu Evento</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nova seção de conteúdo em branco -->
+        <section class="content-section">
+            <div class="container">
+                <h2>Por que Escolher a FlyZone?</h2>
+                <p>
+                    Somos o parque de trampolim mais moderno e seguro de Salto-SP, oferecendo uma experiência única
+                    de diversão e adrenalina para toda a família. Com equipamentos de última geração e uma equipe
+                    altamente treinada, garantimos momentos inesquecíveis em total segurança.
+                </p>
+
+                <div class="features">
+                    <div class="feature">
+                        <h3>Segurança Total</h3>
+                        <p>Equipamentos certificados e equipe treinada para garantir sua segurança em todos os momentos.
+                        </p>
+                    </div>
+                    <div class="feature">
+                        <h3>Diversão Garantida</h3>
+                        <p>Atividades para todas as idades, desde crianças até adultos, com diferentes níveis de
+                            dificuldade.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Eventos Especiais</h3>
+                        <p>Organizamos festas de aniversário, eventos corporativos e celebrações especiais
+                            personalizadas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <!-- Call to Action Section -->
+            <div class="footer-cta">
+                <h2>Pronto para a Aventura?</h2>
+                <p>Venha conhecer o FlyZone e viva momentos únicos de diversão e adrenalina!</p>
+                <div class="footer-buttons">
+                    <a href="tel:1199999999" class="btn-phone">📞 (11) 99999-9999</a>
+                    <a href="https://instagram.com/flyzone" class="btn-instagram">📷 Siga no Instagram</a>
+                </div>
+            </div>
+
+            <!-- Footer Content -->
+            <div class="footer-content">
+                <!-- FlyZone Info -->
+                <div class="footer-section">
+                    <h3>FlyZone</h3>
+                    <p>O parque de trampolim mais divertido de Salto-SP! Venha viver momentos incríveis e cheios de
+                        adrenalina com a família e amigos.</p>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <span>Rua Japão nº5/N, Jardim das Nações - Salto/SP</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <span>(11) 99999-9999</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📷</span>
+                        <span>@flyzone</span>
+                    </div>
+                </div>
+
+                <!-- Operating Hours -->
+                <div class="footer-section">
+                    <h3>Funcionamento</h3>
+                    <p><strong>Quarta a Domingo</strong><br>09:00h às 23:00h</p>
+                    <p><strong>Segunda e Terça-feira</strong><br>Fechado</p>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <p>© 2025 FlyZone Salto. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
