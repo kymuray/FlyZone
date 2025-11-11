@@ -272,62 +272,7 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
-    <script>
-        $(document).ready(function() {
-            // Scroll suave para links âncora
-            $('.scroll-btn, .nav-link').on('click', function(e) {
-                var target = $(this).attr('href') || $(this).data('target');
-                if (target && target.startsWith('#')) {
-                    e.preventDefault();
-                    $('html, body').animate({
-                        scrollTop: $(target).offset().top - 56
-                    }, 800);
-                }
-            });
-            
-            // Toggle detalhes dos depoimentos
-            $('.toggle-details').on('click', function() {
-                var details = $(this).siblings('.detail-content');
-                details.slideToggle();
-                $(this).text(details.is(':visible') ? 'Ver menos' : 'Ver mais');
-            });
-            
-            // Validação do formulário com jQuery
-            $('#contactForm').on('submit', function(e) {
-                e.preventDefault();
-                
-                var nome = $('#nome').val().trim();
-                var email = $('#email').val().trim();
-                var mensagem = $('#mensagem').val().trim();
-                
-                if (nome === '' || email === '' || mensagem === '') {
-                    $('#formMessage').html(
-                        '<div class="alert alert-danger">Por favor, preencha todos os campos obrigatórios.</div>'
-                    );
-                    return false;
-                }
-                
-                // Validação de email
-                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
-                    $('#formMessage').html(
-                        '<div class="alert alert-danger">Por favor, insira um e-mail válido.</div>'
-                    );
-                    return false;
-                }
-                
-                // Sucesso (simulado)
-                $('#formMessage').html(
-                    '<div class="alert alert-success">Mensagem enviada com sucesso! Entraremos em contato em breve.</div>'
-                );
-                
-                // Limpar formulário
-                this.reset();
-                
-                return false;
-            });
-        });
-    </script>
+    
 </body>
 </html>
 
